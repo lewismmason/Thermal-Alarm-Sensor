@@ -1,0 +1,997 @@
+                 -1   $MODLP51
+0000              1   ;--------------------------------------------------------
+0000              2   ; Special Function Registers
+0000              3   ;--------------------------------------------------------
+0000              4   ACC            DATA 0xe0
+0000              5   B              DATA 0xf0
+0000              6   PSW            DATA 0xd0
+0000              7   SP             DATA 0x81
+0000              8   SPX            DATA 0xef
+0000              9   DPL            DATA 0x82
+0000             10   DPH            DATA 0x83
+0000             11   DPLB           DATA 0xd4
+0000             12   DPHB           DATA 0xd5
+0000             13   PAGE           DATA 0xf6
+0000             14   AX             DATA 0xe1
+0000             15   BX             DATA 0xf7
+0000             16   DSPR           DATA 0xe2
+0000             17   FIRD           DATA 0xe3
+0000             18   MACL           DATA 0xe4
+0000             19   MACH           DATA 0xe5
+0000             20   PCON           DATA 0x87
+0000             21   AUXR           DATA 0x8e
+0000             22   AUXR1          DATA 0xa2
+0000             23   DPCF           DATA 0xa1
+0000             24   CKRL           DATA 0x97
+0000             25   CKCKON0        DATA 0x8f
+0000             26   CKCKON1        DATA 0xaf
+0000             27   CKSEL          DATA 0x85
+0000             28   CLKREG         DATA 0xae
+0000             29   OSCCON         DATA 0x85
+0000             30   IE             DATA 0xa8
+0000             31   IEN0           DATA 0xa8
+0000             32   IEN1           DATA 0xb1
+0000             33   IPH0           DATA 0xb7
+0000             34   IP             DATA 0xb8
+0000             35   IPL0           DATA 0xb8
+0000             36   IPH1           DATA 0xb3
+0000             37   IPL1           DATA 0xb2
+0000             38   P0             DATA 0x80
+0000             39   P1             DATA 0x90
+0000             40   P2             DATA 0xa0
+0000             41   P3             DATA 0xb0
+0000             42   P4             DATA 0xc0
+0000             43   P0M0           DATA 0xe6
+0000             44   P0M1           DATA 0xe7
+0000             45   P1M0           DATA 0xd6
+0000             46   P1M1           DATA 0xd7
+0000             47   P2M0           DATA 0xce
+0000             48   P2M1           DATA 0xcf
+0000             49   P3M0           DATA 0xc6
+0000             50   P3M1           DATA 0xc7
+0000             51   P4M0           DATA 0xbe
+0000             52   P4M1           DATA 0xbf
+0000             53   SCON           DATA 0x98
+0000             54   SBUF           DATA 0x99
+0000             55   SADEN          DATA 0xb9
+0000             56   SADDR          DATA 0xa9
+0000             57   BDRCON         DATA 0x9b
+0000             58   BRL            DATA 0x9a
+0000             59   TCON           DATA 0x88
+0000             60   TMOD           DATA 0x89
+0000             61   TCONB          DATA 0x91
+0000             62   TL0            DATA 0x8a
+0000             63   TH0            DATA 0x8c
+0000             64   TL1            DATA 0x8b
+0000             65   TH1            DATA 0x8d
+0000             66   RL0            DATA 0xf2
+0000             67   RH0            DATA 0xf3
+0000             68   RTL1           DATA 0xf4
+0000             69   RH1            DATA 0xf5
+0000             70   WDTRST         DATA 0xa6
+0000             71   WDTPRG         DATA 0xa7
+0000             72   T2CON          DATA 0xc8
+0000             73   T2MOD          DATA 0xc9
+0000             74   RCAP2H         DATA 0xcb
+0000             75   RCAP2L         DATA 0xca
+0000             76   TH2            DATA 0xcd
+0000             77   TL2            DATA 0xcc
+0000             78   SPCON          DATA 0xc3
+0000             79   SPSTA          DATA 0xc4
+0000             80   SPDAT          DATA 0xc5
+0000             81   SSCON          DATA 0x93
+0000             82   SSCS           DATA 0x94
+0000             83   SSDAT          DATA 0x95
+0000             84   SSADR          DATA 0x96
+0000             85   KBLS           DATA 0x9c
+0000             86   KBE            DATA 0x9d
+0000             87   KBF            DATA 0x9e
+0000             88   KBMOD          DATA 0x9f
+0000             89   BMSEL          DATA 0x92
+0000             90   FCON           DATA 0xd2
+0000             91   EECON          DATA 0xd2
+0000             92   ACSRA          DATA 0xa3
+0000             93   ACSRB          DATA 0xab
+0000             94   AREF           DATA 0xbd
+0000             95   DADC           DATA 0xa4
+0000             96   DADI           DATA 0xa5
+0000             97   DADL           DATA 0xac
+0000             98   DADH           DATA 0xad
+0000             99   CCON           DATA 0xd8
+0000            100   CMOD           DATA 0xd9
+0000            101   CL             DATA 0xe9
+0000            102   CH             DATA 0xf9
+0000            103   CCAPM0         DATA 0xda
+0000            104   CCAPM1         DATA 0xdb
+0000            105   CCAPM2         DATA 0xdc
+0000            106   CCAPM3         DATA 0xdd
+0000            107   CCAPM4         DATA 0xde
+0000            108   CCAP0H         DATA 0xfa
+0000            109   CCAP1H         DATA 0xfb
+0000            110   CCAP2H         DATA 0xfc
+0000            111   CCAP3H         DATA 0xfd
+0000            112   CCAP4H         DATA 0xfe
+0000            113   CCAP0L         DATA 0xea
+0000            114   CCAP1L         DATA 0xeb
+0000            115   CCAP2L         DATA 0xec
+0000            116   CCAP3L         DATA 0xed
+0000            117   CCAP4L         DATA 0xee
+0000            118   ;--------------------------------------------------------
+0000            119   ; special function bits
+0000            120   ;--------------------------------------------------------
+0000            121   P              BIT 0xd0
+0000            122   F1             BIT 0xd1
+0000            123   OV             BIT 0xd2
+0000            124   RS0            BIT 0xd3
+0000            125   RS1            BIT 0xd4
+0000            126   F0             BIT 0xd5
+0000            127   AC             BIT 0xd6
+0000            128   CY             BIT 0xd7
+0000            129   EX0            BIT 0xa8
+0000            130   ET0            BIT 0xa9
+0000            131   EX1            BIT 0xaa
+0000            132   ET1            BIT 0xab
+0000            133   ES             BIT 0xac
+0000            134   ET2            BIT 0xad
+0000            135   EC             BIT 0xae
+0000            136   EA             BIT 0xaf
+0000            137   PX0            BIT 0xb8
+0000            138   PT0            BIT 0xb9
+0000            139   PX1            BIT 0xba
+0000            140   PT1            BIT 0xbb
+0000            141   PS             BIT 0xbc
+0000            142   PT2            BIT 0xbd
+0000            143   IP0D           BIT 0xbf
+0000            144   PPCL           BIT 0xbe
+0000            145   PT2L           BIT 0xbd
+0000            146   PLS            BIT 0xbc
+0000            147   PT1L           BIT 0xbb
+0000            148   PX1L           BIT 0xba
+0000            149   PT0L           BIT 0xb9
+0000            150   PX0L           BIT 0xb8
+0000            151   RXD            BIT 0xb0
+0000            152   TXD            BIT 0xb1
+0000            153   INT0           BIT 0xb2
+0000            154   INT1           BIT 0xb3
+0000            155   T0             BIT 0xb4
+0000            156   T1             BIT 0xb5
+0000            157   WR             BIT 0xb6
+0000            158   RD             BIT 0xb7
+0000            159   RI             BIT 0x98
+0000            160   TI             BIT 0x99
+0000            161   RB8            BIT 0x9a
+0000            162   TB8            BIT 0x9b
+0000            163   REN            BIT 0x9c
+0000            164   SM2            BIT 0x9d
+0000            165   SM1            BIT 0x9e
+0000            166   SM0            BIT 0x9f
+0000            167   IT0            BIT 0x88
+0000            168   IE0            BIT 0x89
+0000            169   IT1            BIT 0x8a
+0000            170   IE1            BIT 0x8b
+0000            171   TR0            BIT 0x8c
+0000            172   TF0            BIT 0x8d
+0000            173   TR1            BIT 0x8e
+0000            174   TF1            BIT 0x8f
+0000            175   CP_RL2         BIT 0xc8
+0000            176   C_T2           BIT 0xc9
+0000            177   TR2            BIT 0xca
+0000            178   EXEN2          BIT 0xcb
+0000            179   TCLK           BIT 0xcc
+0000            180   RCLK           BIT 0xcd
+0000            181   EXF2           BIT 0xce
+0000            182   TF2            BIT 0xcf
+0000            183   CF             BIT 0xdf
+0000            184   CR             BIT 0xde
+0000            185   CCF4           BIT 0xdc
+0000            186   CCF3           BIT 0xdb
+0000            187   CCF2           BIT 0xda
+0000            188   CCF1           BIT 0xd9
+0000            189   CCF0           BIT 0xd8
+0000              2   
+0000              3   ; Reset vector
+0000              4   org 0x0000
+0000 02078C       5       ljmp mainprogram
+0003              6   
+0003              7   ; External interrupt 0 vector (not used in this code)
+0003              8   org 0x0003
+0003 32           9            reti
+0004             10   
+0004             11   ; Timer/Counter 0 overflow interrupt vector
+000B             12   org 0x000B
+000B 0203C6      13            ljmp Timer0_ISR
+000E             14   
+000E             15   ; External interrupt 1 vector (not used in this code)
+0013             16   org 0x0013
+0013 32          17            reti
+0014             18   
+0014             19   ; Timer/Counter 1 overflow interrupt vector (not used in this code)
+001B             20   org 0x001B
+001B 32          21            reti
+001C             22   
+001C             23   ; Serial port receive/transmit interrupt vector (not used in this code)
+0023             24   org 0x0023 
+0023 32          25            reti
+0024             26            
+0024             27   ; Timer/Counter 2 overflow interrupt vector
+002B             28   org 0x002B
+002B 32          29            reti
+002C             30   
+002C             31   
+002C             32   CLK  EQU 22118400
+002C             33   BAUD equ 115200
+002C             34   BRG_VAL equ (0x100-(CLK/(16*BAUD)))
+002C             35   TIMER0_RATE   EQU 4096     ; 2048Hz squarewave (peak amplitude of CEM-1203 speaker)
+002C             36   TIMER0_RELOAD EQU ((65536-(CLK/TIMER0_RATE)))
+002C             37   
+                546   $LIST
+                 41   $LIST
+0360             43   
+0360             44   
+0360             45   
+0360             46   
+0360             47   
+0360             48   TIMER0_RELOAD_H DATA 0xf4
+0360             49   TIMER0_RELOAD_L DATA 0xf2
+0360             50   
+0360             51   
+0360             52   ; These ’EQU’ must match the wiring between the microcontroller and ADC
+0360             53   CE_ADC  EQU P2.0                 ;SS'
+0360             54   MY_MOSI EQU P2.1         ;MOSI
+0360             55   MY_MISO EQU P2.2         ;MISO
+0360             56   MY_SCLK EQU P2.3         ;CLK
+0360             57   USER_B  EQU P4.5         ;Button to control average tempurature toggle
+0360             58   ; These ’EQU’ must match the wiring between the microcontroller and LCD
+0360             59   LCD_RS equ P1.1
+0360             60   LCD_RW equ P1.2
+0360             61   LCD_E  equ P1.3
+0360             62   LCD_D4 equ P3.2
+0360             63   LCD_D5 equ P3.3
+0360             64   LCD_D6 equ P3.4
+0360             65   LCD_D7 equ P3.5  
+0360             66   SS equ P2.5
+0360             67   Sound_Out equ P3.7
+0360             68            
+0360             69   ;--------
+0360             70   ;definitions
+0360             71   ;--------
+0360             72   
+0360             73   
+0030             74   DSEG at 30H
+0030             75   buffer           :       ds 30
+004E             76   Result           :       ds 2
+0050             77   x                        :       ds 4
+0054             78   y                        :       ds 4
+0058             79   bcd                      :       ds 5    ;necessary variables for math32.inc
+005D             80   prevtemp         :       ds 1    ; the previous tempurature
+005E             81   MMflag   :       ds 1    ; used for determining if the user wants to track average tempurature
+005F             82   xrunning         :   ds 1        ;the sum of all values used for calculating the average tempurature
+0060             83   xnumber          :       ds 4    ;the number of tempuratures used for the running value
+0064             84   risktemp_bcd:   ds 1     ;the risk-temp
+0065             85   mintemp_bcd:     ds 1    ;min tempurature
+0066             86   maxtemp_bcd:     ds 1    ;max tempurature
+0067             87   risktemp_flag:  ds 1     ;flag indicating if the tempurature is too high
+0068             88   alarmflag:               ds 1    ;determines if the flag should be set
+0069             89   ssflag:          ds 1    ;determines if the flag should be set
+006A             90   
+0000             91   BSEG
+0000             92   mf: dbit 1
+0001             93   
+0360             94   CSEG
+0360             95   
+0360             96   
+0360 20202020    97   clearhalf: db            '        ', 0   ;used to clear the LCD
+     20202020
+     00
+0369 20202020    98   clear: db                '               ', 0    ;used to clear the LCD
+     20202020
+     20202020
+     20202000
+0379 436F6E73    99   Constant: db     'Const', 0
+     7400
+037F 496E6300   100   Increasing: db  'Inc', 0
+0383 44656300   101   Decreasing: db  'Dec', 0
+0387 2D576172   102   Warning1: db  '-Warning-', 0
+     6E696E67
+     2D00
+0391 2D544F4F   103   Warning2: db  '-TOO HOT-', 0
+     20484F54
+     2D00
+039B 4D61783D   104   MaxMin: db 'Max=   Min=', 0
+     2020204D
+     696E3D00
+03A7 4F6E00     105   MaxMinOn: db 'On', 0
+03AA 202000     106   MaxMinOFF: db '  ', 0
+03AD            107   
+03AD            108   ;---------------------------------;
+03AD            109   ; Routine to initialize the ISR   ;
+03AD            110   ; for timer 0                     ;
+03AD            111   ;---------------------------------;
+03AD            112   Timer0_Init:
+03AD E589       113            mov a, TMOD
+03AF 54F0       114            anl a, #0xf0 ; Clear the bits for timer 0
+03B1 4401       115            orl a, #0x01 ; Configure timer 0 as 16-timer
+03B3 F589       116            mov TMOD, a
+03B5 758CEA     117            mov TH0, #high(TIMER0_RELOAD)
+03B8 758AE8     118            mov TL0, #low(TIMER0_RELOAD)
+03BB            119            ; Set autoreload value
+03BB 75F4EA     120            mov TIMER0_RELOAD_H, #high(TIMER0_RELOAD)
+03BE 75F2E8     121            mov TIMER0_RELOAD_L, #low(TIMER0_RELOAD)
+03C1            122            ; Enable the timer and interrupts
+03C1 D2A9       123       setb ET0  ; Enable timer 0 interrupt
+03C3 D28C       124       setb TR0  ; Start timer 0
+03C5 22         125            ret
+03C6            126            
+03C6            127   ;---------------------------------;
+03C6            128   ; ISR for timer 0.  Set to execute;
+03C6            129   ; every 1/4096Hz to generate a    ;
+03C6            130   ; 2048 Hz square wave at pin P3.7 ;
+03C6            131   ;---------------------------------;
+03C6            132   Timer0_ISR:
+03C6 C0E0       133            push acc
+03C8 C0D0       134            push PSW
+03CA            135            
+03CA E568       136            mov  a, alarmflag
+03CC B40105     137            cjne a, #0x1, no_alarm_sound
+03CF B2B7       138            cpl SOUND_OUT ; Connect speaker to P3.7!
+03D1 0203D6     139            ljmp Done_Timer0_ISR
+03D4            140   no_alarm_sound:
+03D4 C2B7       141            clr SOUND_OUT
+03D6            142   Done_Timer0_ISR:
+03D6 D0D0       143            pop PSW
+03D8 D0E0       144            pop acc
+03DA 32         145            reti
+03DB            146   
+03DB            147   
+03DB            148   
+03DB            149   
+03DB            150   GeString:
+03DB 7830       151            mov R0, #buffer
+03DD            152   GSLoop:
+03DD 12042E     153            lcall getchar
+03E0 C0E0       154            push acc
+03E2 C3         155            clr c
+03E3 9410       156            subb a, #10H
+03E5 D0E0       157            pop acc
+03E7 4004       158            jc GSDone
+03E9 F6         159            MOV @R0, A
+03EA 08         160            inc R0
+03EB 80F0       161            SJMP GSLoop
+03ED            162   GSDone:
+03ED E4         163            clr a
+03EE F6         164            mov @R0, a
+03EF 22         165            ret
+03F0            166            
+03F0            167   
+03F0            168   ; Configure the serial port and baud rate
+03F0            169   InitSerialPort:
+03F0            170       ; Since the reset button bounces, we need to wait a bit before
+03F0            171       ; sending messages, otherwise we risk displaying gibberish!
+03F0 79DE       172       mov R1, #222
+03F2 78A6       173       mov R0, #166
+03F4 D8FE       174       djnz R0, $   ; 3 cycles->3*45.21123ns*166=22.51519us
+03F6 D9FA       175       djnz R1, $-4 ; 22.51519us*222=4.998ms
+03F8            176       ; Now we can proceed with the configuration
+03F8 438780     177            orl     PCON,#0x80
+03FB 759852     178            mov     SCON,#0x52
+03FE 759B00     179            mov     BDRCON,#0x00
+0401 759AF4     180            mov     BRL,#BRG_VAL
+0404 759B1E     181            mov     BDRCON,#0x1E ; BDRCON=BRR|TBCK|RBCK|SPD;
+0407 22         182       ret
+0408            183   
+0408            184   INIT_SPI:
+0408 D2A2       185             setb MY_MISO ; Make MISO an input pin
+040A C2A3       186             clr MY_SCLK ; For mode (0,0) SCLK is zero
+040C 22         187             ret
+040D            188   
+040D            189   DO_SPI_G:
+040D C0E0       190             push acc
+040F 7900       191             mov R1, #0 ; Received byte stored in R1
+0411 7A08       192             mov R2, #8 ; Loop counter (8-bits)
+0413            193   DO_SPI_G_LOOP:
+0413 E8         194             mov a, R0 ; Byte to write is in R0
+0414 33         195             rlc a ; Carry flag has bit to write
+0415 F8         196             mov R0, a
+0416 92A1       197             mov MY_MOSI, c
+0418 D2A3       198             setb MY_SCLK ; Transmit
+041A A2A2       199             mov c, MY_MISO ; Read received bit
+041C E9         200             mov a, R1 ; Save received bit in R1
+041D 33         201             rlc a
+041E F9         202             mov R1, a
+041F C2A3       203             clr MY_SCLK
+0421 DAF0       204             djnz R2, DO_SPI_G_LOOP
+0423 D0E0       205             pop acc
+0425 22         206             ret
+0426            207   
+0426            208   ; Send a character using the serial port
+0426            209   putchar:
+0426 3099FD     210       jnb TI, putchar
+0429 C299       211       clr TI
+042B F599       212       mov SBUF, a
+042D 22         213       ret
+042E            214   
+042E            215   getchar:
+042E 3098FD     216            jnb RI, getchar
+0431 C298       217            clr RI
+0433 E599       218            mov a, SBUF
+0435 22         219            ret
+0436            220   
+0436            221   ; Send a constant-zero-terminated string using the serial port
+0436            222   SendString:
+0436 E4         223       clr A
+0437 93         224       movc A, @A+DPTR
+0438 6006       225       jz SendStringDone
+043A 120426     226       lcall putchar
+043D A3         227       inc DPTR
+043E 80F6       228       sjmp SendString
+0440            229   SendStringDone:
+0440 22         230       ret
+0441            231    
+0441            232   ;----------------;
+0441            233   ;Delay    
+0441            234   ;----------------; 
+0441            235   ;Delays for one half second
+0441            236   Delay: 
+0441 C0E0       237            push acc
+0443 E569       238            mov a, ssflag
+0445 B4000C     239            cjne a, #0x00, SSnot0
+0448 C002       240            push AR2
+044A 7AFA       240            mov R2, #250
+044C 120037     240            lcall ?Wait_Milli_Seconds
+044F D002       240            pop AR2
+0451 02047B     241            ljmp doneDelay
+0454            242   
+0454            243   SSnot0:
+0454            244            
+0454 C002       245            push AR2
+0456 7AFA       245            mov R2, #250
+0458 120037     245            lcall ?Wait_Milli_Seconds
+045B D002       245            pop AR2
+045D C002       246            push AR2
+045F 7AFA       246            mov R2, #250
+0461 120037     246            lcall ?Wait_Milli_Seconds
+0464 D002       246            pop AR2
+0466 C002       247            push AR2
+0468 7AFA       247            mov R2, #250
+046A 120037     247            lcall ?Wait_Milli_Seconds
+046D D002       247            pop AR2
+046F C002       248            push AR2
+0471 7AFA       248            mov R2, #250
+0473 120037     248            lcall ?Wait_Milli_Seconds
+0476 D002       248            pop AR2
+0478 02047B     249            ljmp doneDelay
+047B            250            
+047B            251            
+047B            252   doneDelay:
+047B D0E0       253            pop acc
+047D 22         254            ret
+047E            255            
+047E            256   ;----------------;
+047E            257   ;Get_ADC_Value    
+047E            258   ;----------------;  
+047E            259   Get_ADC_Value:   ;get the current values from SPI, store 10-bit value in Result/Result+1
+047E            260            ;Read_ADC_Channel(0)
+047E C2A0       261            clr CE_ADC
+0480 7801       262            mov R0, #00000001B ; Start bit:1
+0482 12040D     263            lcall DO_SPI_G
+0485 7880       264            mov R0, #10000000B ; Single ended, read channel 0
+0487 12040D     265            lcall DO_SPI_G
+048A E9         266            mov a, R1 ; R1 contains bits 8 and 9
+048B 5403       267            anl a, #00000011B ; We need only the two least significant bits
+048D F54F       268            mov Result+1, a ; Save result high.
+048F 7855       269            mov R0, #55H ; It doesn't matter what we transmit...
+0491 12040D     270            lcall DO_SPI_G
+0494 894E       271            mov Result, R1 ; R1 contains bits 0 to 7. Save result low.
+0496 D2A0       272            setb CE_ADC
+0498 1206B8     273            lcall Execute_Result
+049B 120441     274            lcall Delay     
+049E 22         275            ret
+049F            276            
+049F            277   ;------------------------------------;
+049F            278   ;Display_10_digit_BCD
+049F            279   ;------------------------------------;
+049F            280   Display_10_digit_BCD:
+049F C0E0       281            push acc
+04A1 740C       281            mov a, #12
+04A3 14         281            dec a
+04A4 1200BD     281            lcall ?Set_Cursor_2 ; Select column and row
+04A7 D0E0       281            pop acc
+04A9 C000       282            push ar0
+04AB A85C       282            mov r0, bcd+4
+04AD 1200C4     282            lcall ?Display_BCD
+04B0 D000       282            pop ar0
+04B2 C000       283            push ar0
+04B4 A85B       283            mov r0, bcd+3
+04B6 1200C4     283            lcall ?Display_BCD
+04B9 D000       283            pop ar0
+04BB C000       284            push ar0
+04BD A85A       284            mov r0, bcd+2
+04BF 1200C4     284            lcall ?Display_BCD
+04C2 D000       284            pop ar0
+04C4 C000       285            push ar0
+04C6 A859       285            mov r0, bcd+1
+04C8 1200C4     285            lcall ?Display_BCD
+04CB D000       285            pop ar0
+04CD C000       286            push ar0
+04CF A858       286            mov r0, bcd+0
+04D1 1200C4     286            lcall ?Display_BCD
+04D4 D000       286            pop ar0
+04D6 22         287            ret
+04D7            288            
+04D7            289   ;----------------;
+04D7            290   ;Volt_to_Temp     
+04D7            291   ;----------------;
+04D7            292   Volt_to_Temp:    ;change the voltage measurement from ADC to a tempurature using math funcs
+04D7 854E50     293            mov x+0, Result + 0
+04DA 854F51     294            mov x+1, Result + 1
+04DD 755200     295            mov x+2, #0x00
+04E0 755300     296            mov x+3, #0x00
+04E3            297            
+04E3 75549A     298            mov y+0, #low (410 % 0x10000) 
+04E6 755501     298            mov y+1, #high(410 % 0x10000) 
+04E9 755600     298            mov y+2, #low (410 / 0x10000) 
+04EC 755700     298            mov y+3, #high(410 / 0x10000) 
+04EF 12026A     299            lcall mul32 
+04F2 7554FF     300            mov y+0, #low (1023 % 0x10000) 
+04F5 755503     300            mov y+1, #high(1023 % 0x10000) 
+04F8 755600     300            mov y+2, #low (1023 / 0x10000) 
+04FB 755700     300            mov y+3, #high(1023 / 0x10000) 
+04FE 1202F7     301            lcall div32             ;x now contains T
+0501            302            
+0501 755411     303            mov y+0, #low (273 % 0x10000) 
+0504 755501     303            mov y+1, #high(273 % 0x10000) 
+0507 755600     303            mov y+2, #low (273 / 0x10000) 
+050A 755700     303            mov y+3, #high(273 / 0x10000) 
+050D 1201D6     304            lcall sub32
+0510            305            
+0510 1206CB     306            lcall Inc_Dec_Temp              ;will print to the LCD if the tempurature is increasing or decreasing
+0513 120521     307            lcall Max_Min_Temp              ;can print the average tempurature
+0516 1205EC     308            lcall Check_Temp_Hazard ;checks if the value is greater than risk-temp
+0519 1200F0     309            lcall hex2bcd
+051C 22         310            ret
+051D            311   
+051D            312   newline:
+051D 200D0A00   313       DB  ' ', '\r', '\n', 0
+0521            314       
+0521            315   ;----------------;
+0521            316   ;Max_Min_Temp     
+0521            317   ;----------------;
+0521            318   Max_Min_Temp:                            ;if user enables, displays the max/ min temp till disabled
+0521            319   
+0521 C0E0       320            push acc
+0523 E550       321                    mov a, x                ;x is a hex value, turn it into a bcd value and compare with max/mintemp
+0525 C0E0       322            push acc                                                
+0527 20C55E     323            jb USER_B, Skip_Toggle_Max_Min_Temp  ; if the 'USER_B' button is not pressed skip
+052A C002       324            push AR2
+052C 7A32       324            mov R2, #50
+052E 120037     324            lcall ?Wait_Milli_Seconds
+0531 D002       324            pop AR2                                  ; Debounce delay.  This macro is also in 'LCD_4bit.inc'
+0533 20C552     325            jb USER_B, Skip_Toggle_Max_Min_Temp  ; if the 'USER_B' button is not pressed skip
+0536 30C5FD     326            jnb USER_B, $
+0539            327            ;button has been pressed, toggle temp setting
+0539            328            
+0539 E55E       329            mov a, MMflag                                           ;determining what the previous setting was
+053B B40022     330            cjne a, #0x00, Max_Min_Temp_Flag_One    ;if a is not 0 it is 1, then branch
+053E 755E01     331            mov MMflag, #0x01       ;set flag 1
+0541 C0E0       332            push acc
+0543 740F       332            mov a, #15
+0545 14         332            dec a
+0546 1200BD     332            lcall ?Set_Cursor_2 ; Select column and row
+0549 D0E0       332            pop acc
+054B C083       333            push dph
+054D C082       333            push dpl
+054F C0E0       333            push acc
+0551 9003A7     333            mov dptr, #MaxMinOn
+0554 1200B2     333            lcall ?Send_Constant_String
+0557 D0E0       333            pop acc
+0559 D082       333            pop dpl
+055B D083       333            pop dph
+055D            334            
+055D            335            
+055D 020588     336            ljmp Skip_Toggle_Max_Min_Temp
+0560            337            
+0560            338   Max_Min_Temp_Flag_One:
+0560 755E00     339            mov MMflag, #0x00       ;set flag 0
+0563 756600     340            mov maxtemp_bcd, #0x00
+0566 756544     341            mov mintemp_bcd, #0x44
+0569 C0E0       342            push acc
+056B 740F       342            mov a, #15
+056D 14         342            dec a
+056E 1200BD     342            lcall ?Set_Cursor_2 ; Select column and row
+0571 D0E0       342            pop acc
+0573 C083       343            push dph
+0575 C082       343            push dpl
+0577 C0E0       343            push acc
+0579 9003AA     343            mov dptr, #MaxMinOff
+057C 1200B2     343            lcall ?Send_Constant_String
+057F D0E0       343            pop acc
+0581 D082       343            pop dpl
+0583 D083       343            pop dph
+0585            344            
+0585 020588     345            ljmp Skip_Toggle_Max_Min_Temp
+0588            346            
+0588            347            
+0588            348            
+0588            349            
+0588            350   Skip_Toggle_Max_Min_Temp:
+0588            351   
+0588 7401       352            mov a, #0x01
+058A B55E58     353            cjne a, MMflag, Not_Max_Min_Temp
+058D            354            ;now we need to compare the current values and place values in variables accordingly
+058D 1200F0     355            lcall hex2bcd   ;bcd now contains the bcd number for x
+0590 E558       356            mov a, bcd              
+0592            357            
+0592            358            ;now compare a with max and min temps to see if the temp needs to replace one
+0592 B56600     359            cjne a, maxtemp_bcd, Check_Carry_T_1
+0595            360   Check_Carry_T_1:
+0595 4002       361            jc Not_New_Max_Temp     ;if a is less than maxtemp, don't replace so jump check min
+0597 F566       362            mov maxtemp_bcd, a      ;if maxtemp_bcd now contains new maxtemp
+0599            363            
+0599            364            
+0599            365   Not_New_Max_Temp:
+0599 B56500     366            cjne a, mintemp_bcd, Check_Carry_T_2
+059C            367   Check_Carry_T_2:
+059C 4003       368            jc New_Min_Temp         ;if a is less than mintemp, new mintemp
+059E 0205A3     369            ljmp Display_Max_Min
+05A1            370            
+05A1            371   New_Min_Temp:    
+05A1 F565       372            mov mintemp_bcd, a      ;if maxtemp_bcd now contains new min temp
+05A3            373            
+05A3            374   Display_Max_Min:
+05A3 C0E0       375            push acc
+05A5 7401       375            mov a, #1
+05A7 14         375            dec a
+05A8 1200BD     375            lcall ?Set_Cursor_2 ; Select column and row
+05AB D0E0       375            pop acc
+05AD C083       376            push dph
+05AF C082       376            push dpl
+05B1 C0E0       376            push acc
+05B3 90039B     376            mov dptr, #MaxMin
+05B6 1200B2     376            lcall ?Send_Constant_String
+05B9 D0E0       376            pop acc
+05BB D082       376            pop dpl
+05BD D083       376            pop dph
+05BF            377            
+05BF C0E0       378            push acc
+05C1 7405       378            mov a, #5
+05C3 14         378            dec a
+05C4 1200BD     378            lcall ?Set_Cursor_2 ; Select column and row
+05C7 D0E0       378            pop acc
+05C9 C000       379            push ar0
+05CB A866       379            mov r0, maxtemp_bcd
+05CD 1200C4     379            lcall ?Display_BCD
+05D0 D000       379            pop ar0
+05D2 C0E0       380            push acc
+05D4 740C       380            mov a, #12
+05D6 14         380            dec a
+05D7 1200BD     380            lcall ?Set_Cursor_2 ; Select column and row
+05DA D0E0       380            pop acc
+05DC C000       381            push ar0
+05DE A865       381            mov r0, mintemp_bcd
+05E0 1200C4     381            lcall ?Display_BCD
+05E3 D000       381            pop ar0
+05E5            382            
+05E5            383            
+05E5            384   Not_Max_Min_Temp:
+05E5 D0E0       385            pop acc
+05E7 F550       386            mov x, a
+05E9 D0E0       387            pop acc         
+05EB 22         388            ret
+05EC            389            
+05EC            390   ;---------------------;
+05EC            391   ;Check_Temp_Hazard        
+05EC            392   ;---------------------;
+05EC            393   Check_Temp_Hazard:                       ;checks if the tempurature is greater than the risk-temp, if so, enable the alarm
+05EC C0E0       394            push acc
+05EE E550       395            mov a, x
+05F0 C0E0       396            push acc
+05F2            397            
+05F2 E550       398            mov a, x
+05F4 1200F0     399            lcall hex2bcd
+05F7 E558       400            mov a, bcd
+05F9            401            
+05F9 B56441     402            cjne a, risktemp_bcd, RiskTemp_NOT_CurrTemp     ;compare risktemp and x
+05FC C0E0       403            push acc
+05FE 7409       403            mov a, #9
+0600 14         403            dec a
+0601 1200BF     403            lcall ?Set_Cursor_1 ; Select column and row
+0604 D0E0       403            pop acc
+0606 C083       404            push dph
+0608 C082       404            push dpl
+060A C0E0       404            push acc
+060C 900360     404            mov dptr, #Clearhalf
+060F 1200B2     404            lcall ?Send_Constant_String
+0612 D0E0       404            pop acc
+0614 D082       404            pop dpl
+0616 D083       404            pop dph
+0618 C0E0       405            push acc
+061A 7408       405            mov a, #8
+061C 14         405            dec a
+061D 1200BF     405            lcall ?Set_Cursor_1 ; Select column and row
+0620 D0E0       405            pop acc
+0622 C083       406            push dph
+0624 C082       406            push dpl
+0626 C0E0       406            push acc
+0628 900387     406            mov dptr, #Warning1
+062B 1200B2     406            lcall ?Send_Constant_String
+062E D0E0       406            pop acc
+0630 D082       406            pop dpl
+0632 D083       406            pop dph
+0634 756701     407            mov risktemp_flag, #0x01                ;set flag to 1 (current temp warning)
+0637 756800     408            mov alarmflag, #0x00
+063A 0206AD     409            ljmp Done_Temp_Hazard
+063D            410            
+063D            411   RiskTemp_NOT_CurrTemp:   
+063D 403E       412            jc Not_Too_Hot          ;if carry set, that means a is less than risktemp, jump 
+063F            413            ;if didnt't jump, temp is too hot, display this on screen and allow the alarm
+063F C0E0       414            push acc
+0641 7409       414            mov a, #9
+0643 14         414            dec a
+0644 1200BF     414            lcall ?Set_Cursor_1 ; Select column and row
+0647 D0E0       414            pop acc
+0649 C083       415            push dph
+064B C082       415            push dpl
+064D C0E0       415            push acc
+064F 900360     415            mov dptr, #Clearhalf
+0652 1200B2     415            lcall ?Send_Constant_String
+0655 D0E0       415            pop acc
+0657 D082       415            pop dpl
+0659 D083       415            pop dph
+065B C0E0       416            push acc
+065D 7408       416            mov a, #8
+065F 14         416            dec a
+0660 1200BF     416            lcall ?Set_Cursor_1 ; Select column and row
+0663 D0E0       416            pop acc
+0665 C083       417            push dph
+0667 C082       417            push dpl
+0669 C0E0       417            push acc
+066B 900391     417            mov dptr, #Warning2
+066E 1200B2     417            lcall ?Send_Constant_String
+0671 D0E0       417            pop acc
+0673 D082       417            pop dpl
+0675 D083       417            pop dph
+0677            418            
+0677 1206B4     419            lcall Sound_Alarm
+067A 0206AD     420            ljmp Done_Temp_Hazard
+067D            421            
+067D            422   Not_Too_Hot:
+067D            423            ;so check if the previous value of the flag was on, if so, clear the screen and 
+067D            424            ;reset the flag
+067D E567       425            mov a, risktemp_flag
+067F B40006     426            cjne a, #0x00, Need_To_Reset_Flag       ;if the previous flag was not zero, reset
+0682 756800     427            mov alarmflag, #0x00
+0685 0206AD     428            ljmp Done_Temp_Hazard
+0688            429            
+0688            430   Need_To_Reset_Flag:
+0688 756700     431            mov risktemp_flag, #0x00
+068B C0E0       432            push acc
+068D 7409       432            mov a, #9
+068F 14         432            dec a
+0690 1200BF     432            lcall ?Set_Cursor_1 ; Select column and row
+0693 D0E0       432            pop acc
+0695 C083       433            push dph
+0697 C082       433            push dpl
+0699 C0E0       433            push acc
+069B 900360     433            mov dptr, #Clearhalf
+069E 1200B2     433            lcall ?Send_Constant_String
+06A1 D0E0       433            pop acc
+06A3 D082       433            pop dpl
+06A5 D083       433            pop dph
+06A7 756800     434            mov alarmflag, #0x00
+06AA 0206AD     435            ljmp Done_Temp_Hazard
+06AD            436            
+06AD            437   Done_Temp_Hazard:        
+06AD D0E0       438            pop acc
+06AF F550       439            mov x, a
+06B1 D0E0       440            pop acc
+06B3 22         441            ret
+06B4            442   
+06B4            443   ;---------------------;
+06B4            444   ;Sount_Alarm      
+06B4            445   ;---------------------;
+06B4            446   Sound_Alarm:                     ;enables the alarm flag to be used by interupts
+06B4 756801     447            mov alarmflag, #0x01
+06B7 22         448            ret
+06B8            449            
+06B8            450       
+06B8            451   ;----------------;
+06B8            452   ;Execute_Result   
+06B8            453   ;----------------;
+06B8            454   Execute_Result:
+06B8 1204D7     455            lcall Volt_to_Temp      ;change the result into a BCD number
+06BB            456            
+06BB C000       457            push ar0
+06BD A858       457            mov r0, bcd
+06BF 1200DA     457            lcall ?Send_BCD
+06C2 D000       457            pop ar0
+06C4            458            
+06C4 90051D     459            mov DPTR, #newline
+06C7 120436     460            lcall sendstring
+06CA            461   
+06CA 22         462            ret
+06CB            463            
+06CB            464   ;----------------;
+06CB            465   ;Inc_Dec_Temp     
+06CB            466   ;----------------;
+06CB            467   Inc_Dec_Temp:            ;prints on the LCD if the tempurature is increasing or decreasing or staying constant
+06CB C0E0       468            push acc
+06CD E55D       469            mov a, prevtemp
+06CF B5503B     470            cjne a, x, New_Temp_Not_Equal   ;compare prevtemp with new value
+06D2 C0E0       471            push acc
+06D4 7401       471            mov a, #1
+06D6 14         471            dec a
+06D7 1200BF     471            lcall ?Set_Cursor_1 ; Select column and row
+06DA D0E0       471            pop acc
+06DC C083       472            push dph
+06DE C082       472            push dpl
+06E0 C0E0       472            push acc
+06E2 900369     472            mov dptr, #clear
+06E5 1200B2     472            lcall ?Send_Constant_String
+06E8 D0E0       472            pop acc
+06EA D082       472            pop dpl
+06EC D083       472            pop dph
+06EE C0E0       473            push acc
+06F0 7401       473            mov a, #1
+06F2 14         473            dec a
+06F3 1200BF     473            lcall ?Set_Cursor_1 ; Select column and row
+06F6 D0E0       473            pop acc
+06F8 C083       474            push dph
+06FA C082       474            push dpl
+06FC C0E0       474            push acc
+06FE 900379     474            mov dptr, #Constant
+0701 1200B2     474            lcall ?Send_Constant_String
+0704 D0E0       474            pop acc
+0706 D082       474            pop dpl
+0708 D083       474            pop dph
+070A            475       
+070A 020785     476            ljmp Done_INC_Dec_Temp
+070D            477            
+070D            478   New_Temp_Not_Equal:
+070D            479            ;if not equal we need to check for if x is higher or lower than previous temp
+070D            480            ;note: for cjne if 'a' is less than 'x' then carry bit is set
+070D            481            
+070D 403B       482            jc  Temp_Flag_Set       ;jump if set, ie if a is less than x (so tempurature is increasing)
+070F            483            ;otherwise Temp is decreasing
+070F C0E0       484            push acc
+0711 7401       484            mov a, #1
+0713 14         484            dec a
+0714 1200BF     484            lcall ?Set_Cursor_1 ; Select column and row
+0717 D0E0       484            pop acc
+0719 C083       485            push dph
+071B C082       485            push dpl
+071D C0E0       485            push acc
+071F 900369     485            mov dptr, #clear
+0722 1200B2     485            lcall ?Send_Constant_String
+0725 D0E0       485            pop acc
+0727 D082       485            pop dpl
+0729 D083       485            pop dph
+072B C0E0       486            push acc
+072D 7401       486            mov a, #1
+072F 14         486            dec a
+0730 1200BF     486            lcall ?Set_Cursor_1 ; Select column and row
+0733 D0E0       486            pop acc
+0735 C083       487            push dph
+0737 C082       487            push dpl
+0739 C0E0       487            push acc
+073B 900383     487            mov dptr, #Decreasing
+073E 1200B2     487            lcall ?Send_Constant_String
+0741 D0E0       487            pop acc
+0743 D082       487            pop dpl
+0745 D083       487            pop dph
+0747            488       
+0747 020785     489            ljmp Done_INC_Dec_Temp
+074A            490            
+074A            491   Temp_Flag_set:
+074A C0E0       492            push acc
+074C 7401       492            mov a, #1
+074E 14         492            dec a
+074F 1200BF     492            lcall ?Set_Cursor_1 ; Select column and row
+0752 D0E0       492            pop acc
+0754 C083       493            push dph
+0756 C082       493            push dpl
+0758 C0E0       493            push acc
+075A 900369     493            mov dptr, #clear
+075D 1200B2     493            lcall ?Send_Constant_String
+0760 D0E0       493            pop acc
+0762 D082       493            pop dpl
+0764 D083       493            pop dph
+0766 C0E0       494            push acc
+0768 7401       494            mov a, #1
+076A 14         494            dec a
+076B 1200BF     494            lcall ?Set_Cursor_1 ; Select column and row
+076E D0E0       494            pop acc
+0770 C083       495            push dph
+0772 C082       495            push dpl
+0774 C0E0       495            push acc
+0776 90037F     495            mov dptr, #Increasing
+0779 1200B2     495            lcall ?Send_Constant_String
+077C D0E0       495            pop acc
+077E D082       495            pop dpl
+0780 D083       495            pop dph
+0782 020785     496            ljmp Done_INC_Dec_Temp
+0785            497            
+0785            498   Done_INC_Dec_Temp:
+0785 E550       499            mov a, x
+0787 F55D       500            mov prevtemp, a         ; place the current value in prevtemp to be used next cycle
+0789 D0E0       501            pop acc
+078B 22         502            ret
+078C            503   
+078C            504   ;----------------;
+078C            505   ;main program     
+078C            506   ;----------------;
+078C            507   MainProgram:
+078C 75817F     508       mov SP, #7FH ; Set the stack pointer to the begining of idata
+078F            509       ;enable interupts
+078F 1203AD     510       lcall Timer0_Init
+0792 75E600     511       mov P0M0, #0
+0795 75E700     512       mov P0M1, #0
+0798 D2AF       513       setb EA              ;enable global interupts.
+079A            514       
+079A 1203F0     515       lcall InitSerialPort
+079D 120408     516       lcall INIT_SPI
+07A0 120086     517       lcall LCD_4BIT
+07A3 C0E0       518            push acc
+07A5 7401       518            mov a, #1
+07A7 14         518            dec a
+07A8 1200BF     518            lcall ?Set_Cursor_1 ; Select column and row
+07AB D0E0       518            pop acc
+07AD C083       519            push dph
+07AF C082       519            push dpl
+07B1 C0E0       519            push acc
+07B3 900369     519            mov dptr, #clear
+07B6 1200B2     519            lcall ?Send_Constant_String
+07B9 D0E0       519            pop acc
+07BB D082       519            pop dpl
+07BD D083       519            pop dph;
+07BF C0E0       520            push acc
+07C1 7401       520            mov a, #1
+07C3 14         520            dec a
+07C4 1200BF     520            lcall ?Set_Cursor_1 ; Select column and row
+07C7 D0E0       520            pop acc
+07C9            521       
+07C9 7440       522       mov a, #0x40
+07CB D4         523       da a
+07CC F564       524       mov risktemp_bcd, a
+07CE 7444       525       mov a, #0x44
+07D0 D4         526       da a
+07D1 F565       527       mov mintemp_bcd, a   ;placing a large starting mintemp
+07D3 7400       528       mov a, #0x00
+07D5 D4         529       da a
+07D6 F566       530            mov maxtemp_bcd, a      ;placing a small starting maxtemp
+07D8 755E00     531            mov MMflag, #0x00
+07DB            532   
+07DB            533       
+07DB            534       
+07DB            535   Fetch_Every_Sec:                         ;prints the Temp from channel 0 into PuTTY every second
+07DB 12047E     536            lcall Get_ADC_Value
+07DE            537   
+07DE            538            
+07DE            539            ;check if the user wants to change the sampling speed
+07DE 20A512     540            jb SS, skipsschangetp  ; if the 'USER_B' button is not pressed skip
+07E1 C002       541            push AR2
+07E3 7A32       541            mov R2, #50
+07E5 120037     541            lcall ?Wait_Milli_Seconds
+07E8 D002       541            pop AR2                                  ; Debounce delay.  This macro is also in 'LCD_4bit.inc'
+07EA 20A506     542            jb SS, skipsschangetp  ; if the 'USER_B' button is not pressed skip
+07ED 30A5FD     543            jnb SS, $
+07F0 0207F6     544            ljmp sschange
+07F3            545   skipsschangetp:
+07F3 020804     546            ljmp skipsschange
+07F6            547   sschange:
+07F6 E569       548            mov a, ssflag
+07F8 B40006     549            cjne a, #0x00, SSnot0swap
+07FB 756901     550            mov ssflag, #0x01
+07FE 020804     551            ljmp skipsschange
+0801            552   SSnot0swap:
+0801 756900     553            mov ssflag, #0x00
+0804            554            
+0804            555            
+0804            556            
+0804            557            
+0804            558            
+0804            559   skipsschange:
+0804            560   
+0804 0207DB     561                    ljmp Fetch_Every_Sec
+0807            562   
+0807            563   
+0807            564   EN
